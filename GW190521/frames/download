@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl "https://gwosc.org/eventapi/html/O3_Discovery_Papers/GW190521/v2/H-H1_GWOSC_16KHZ_R2-1242440920-4096.gwf" -o H1-strain.gwf
+curl "https://gwosc.org/eventapi/html/O3_Discovery_Papers/GW190521/v2/L-L1_GWOSC_16KHZ_R2-1242440920-4096.gwf" -o L1-strain.gwf
+curl "https://gwosc.org/eventapi/html/O3_Discovery_Papers/GW190521/v2/V-V1_GWOSC_16KHZ_R2-1242440920-4096.gwf" -o V1-strain.gwf

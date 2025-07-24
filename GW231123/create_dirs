@@ -1,0 +1,50 @@
+#!/bin/bash
+
+MODES=("220" "220_330" "220_210" "220_221" "220_320" "220_440" "220_200")
+WAVS=("wav1" "wav3")
+#HOME="/home/alcorrei/bh_spec/GW231123"
+HOME=".."
+
+    for mode in "${MODES[@]}"; do
+        mkdir $mode
+        cd $mode
+        for wav_num in "${WAVS[@]}"; do
+            filename=${mode}_${wav_num}
+            touch $filename.sh
+            echo "#!/bin/bash -l" >> $filename.sh
+            echo "" >> $filename.sh
+            echo "#SBATCH --job-name=${mode}_${wav_num}" >> $filename.sh
+            echo "#SBATCH --nodes=8" >> $filename.sh
+            echo "#SBATCH --ntasks-per-node=32" >> $filename.sh
+            echo "#SBATCH --cpus-per-task=1" >> $filename.sh
+            echo "#SBATCH --mem=128G" >> $filename.sh
+            echo "#SBATCH --time=14-00:00:00" >> $filename.sh
+            echo "#SBATCH --partition=gpu_zone2" >> $filename.sh
+            echo "#SBATCH --output=${mode}_${wav_num}-%j.out" >> $filename.sh
+            echo "#SBATCH --error=${mode}_${wav_num}-%j.err" >> $filename.sh
+            echo "" >> $filename.sh
+            echo "module purge" >> $filename.sh
+            echo "" >> $filename.sh
+            echo "eval \"\$(/home/\$(whoami)/miniforge3/bin/conda shell.bash hook)\"" >> $filename.sh
+            echo "conda activate pycbc" >> $filename.sh
+            echo "" >> $filename.sh
+            echo "export OMPI_MCA_pml=ob1" >> $filename.sh
+            echo "export OMPI_MCA_btl=self,tcp" >> $filename.sh
+            echo "export OMPI_MCA_btl_tcp_if_include=10.59.0.0/16" >> $filename.sh
+            echo "" >> $filename.sh
+            echo "export OMP_NUM_THREADS=1" >> $filename.sh
+            echo "mpirun -np \$SLURM_NTASKS -- pycbc_inference \\" >> $filename.sh
+            echo "    --config-file ${HOME}/common.ini \\" >> $filename.sh
+            echo "        ${HOME}/data.ini \\" >> $filename.sh
+            echo "        ${HOME}/${wav_num}.ini \\" >> $filename.sh
+            if [[ ${mode} != "220" ]]; then
+                echo "        ${HOME}/lmn${mode:4}.ini \\" >> $filename.sh
+            else
+                echo "        ${HOME}/lmn${mode}.ini \\" >> $filename.sh
+            fi
+            echo "    --output-file ${filename}.hdf \\" >> $filename.sh
+            echo "    --use-mpi --verbose" >> $filename.sh
+            chmod u+x $filename.sh
+        done
+        cd ..
+    done
