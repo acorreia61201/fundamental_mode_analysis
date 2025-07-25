@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MODES=("220" "220_330" "220_210" "220_221" "220_320" "220_440" "220_200")
-WAVS=("wav1" "wav3")
+WAVS=("wav1" "wav2" "wav3")
 #HOME="/home/alcorrei/bh_spec/GW231123"
 HOME=".."
 
@@ -35,7 +35,7 @@ HOME=".."
             echo "export OMP_NUM_THREADS=1" >> $filename.sh
             echo "mpirun -np \$SLURM_NTASKS -- pycbc_inference \\" >> $filename.sh
             echo "    --config-file ${HOME}/common.ini \\" >> $filename.sh
-            echo "        ${HOME}/data.ini \\" >> $filename.sh
+            echo "        ${HOME}/data_GW231123.ini \\" >> $filename.sh
             echo "        ${HOME}/${wav_num}.ini \\" >> $filename.sh
             if [[ ${mode} != "220" ]]; then
                 echo "        ${HOME}/lmn${mode:4}.ini \\" >> $filename.sh
