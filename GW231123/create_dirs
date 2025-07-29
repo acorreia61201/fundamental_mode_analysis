@@ -1,9 +1,9 @@
 #!/bin/bash
 
-MODES=("220" "220_330" "220_210" "220_221" "220_320" "220_440" "220_200" "220_210_200" "220_210_320" "220_210_330" "220_210_440")
+MODES=("220" "220_330" "220_210" "220_221" "220_320" "220_440" "220_200" "220_210_200" "220_210_320" "220_210_330" "220_210_440" "wavelet")
 WAVS=("wav1" "wav2" "wav3")
 #HOME="/home/alcorrei/bh_spec/GW231123"
-HOME=".."
+HOME="../.."
 
     for mode in "${MODES[@]}"; do
         mkdir $mode
@@ -34,13 +34,19 @@ HOME=".."
             echo "" >> $filename.sh
             echo "export OMP_NUM_THREADS=1" >> $filename.sh
             echo "mpirun -np \$SLURM_NTASKS -- pycbc_inference \\" >> $filename.sh
-            echo "    --config-file ${HOME}/common.ini \\" >> $filename.sh
-            echo "        ${HOME}/data_GW231123.ini \\" >> $filename.sh
-            echo "        ${HOME}/${wav_num}.ini \\" >> $filename.sh
-            if [[ ${mode} != "220" ]]; then
-                echo "        ${HOME}/lmn${mode:4}.ini \\" >> $filename.sh
+            if [[ ${mode} != "wavelet" ]]; then
+                echo "    --config-file ${HOME}/configs/common.ini \\" >> $filename.sh
+                echo "        ${HOME}/configs/${wav_num}.ini \\" >> $filename.sh
+                echo "        ${HOME}/configs/data_GW231123.ini \\" >> $filename.sh
+                if [[ ${mode} != "220" ]]; then
+                    echo "        ${HOME}/configs/lmn${mode:4}.ini \\" >> $filename.sh
+                else
+                    echo "        ${HOME}/configs/lmn${mode}.ini \\" >> $filename.sh
+                fi
             else
-                echo "        ${HOME}/lmn${mode}.ini \\" >> $filename.sh
+                echo "    --config-file ${HOME}/configs/common_wavelet.ini \\" >> $filename.sh
+                echo "        ${HOME}/configs/${wav_num}_only.ini \\" >> $filename.sh
+                echo "        ${HOME}/configs/data_GW231123_wavelet.ini \\" >> $filename.sh
             fi
             echo "    --output-file ${filename}.hdf \\" >> $filename.sh
             echo "    --use-mpi --verbose" >> $filename.sh
