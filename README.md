@@ -4,7 +4,7 @@ Workspace for analyzing the ringdowns of GW190521, GW231123, and injections with
 
 ## Requirements
 
-You will need PyCBC version 2.9.0. Additionally, you will need the wavelet waveform plugin: https://github.com/acorreia61201/wavelet_merger_model.
+You will need PyCBC version 2.9.0 (installable via `pip` as of August 7 2025). Additionally, you will need the wavelet waveform plugin: https://github.com/acorreia61201/wavelet_merger_model.
 
 ## File structure
 
