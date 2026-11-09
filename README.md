@@ -9,14 +9,18 @@ You will need PyCBC version 2.9.0 (installable via `pip` as of August 7 2025). A
 ## File structure
 
 The `configs` top-level directory contains the configuration files for each run. 
-Settings common to each run are stored in `common.ini`.
-Each QNM configuration has its own file titled `lmn{qnm}.ini`.
-Each waveform has its own file titled `data_{event}.ini` (or `data_{injection}.ini` for injection runs).
-Each number of wavelets has its own file titled `wav{n}.ini`.
+Settings common to each run are stored in `prior_common.ini`.
+Each QNM configuration has its own file titled `prior_ringdown_{qnm}.ini`. QNM models with equatorial asymmetry allowed are denoted `prior_ringdown_d{qnm}.ini`.
+Each waveform has its own file titled `data-{event}.ini` (or `data-{injection}.ini` for injection runs).
+Each number of wavelets has its own file titled `prior_inspiral_{n}wavelet.ini`.
+Sampler settings are stored in `sampler.ini`.
+Model settings are stored in `model.ini`. Options specific to gating are stored in `gate_fixed_edge_*.ini`.
+The executable `check_configs.py` makes sure that the composite config files to be run from the `runs` directory contain all the proper parameters.
 
-Each event/injection has its own correspondingly named top-level directory. 
-Each directory will have its own `create_dirs` file that, when run, will generate one subdirectory per QNM configuration.
-A script that contains the relevant `pycbc_inference` command will be generated in each subdirectory.
-That script can be launched from the QNM directories to generate the HDF outputs.
+The `injections` top-level directory contains the injection files for zero-noise simulated runs.
+Currently only contains `gw190521` for GW190521-like zero-noise injections. Each injection models a 250M source-frame binary, with distances, mass ratios, and spins manipulated to match different GW190521 hypotheses.
 
-There will also be a directory (either titled `frames` or `inj`) in each top-level directory that contains scripts to generate the reference waveform for each run.
+The `psds` top-level directory contains PSDs extracted from the real data of GW190521, and is used to estimate the PSDs for zero-noise simulations.
+
+The `runs` top-level directory contains results. Locally, this should also be the place where analyses are run and stored.
+Injection results are stored in `gw190521_injections`. See corresponding README for that directory's file structure.
