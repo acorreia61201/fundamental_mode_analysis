@@ -1,0 +1,7 @@
+--expected-parameters
+	 'ringdown__final_mass:352.8710353022861' \
+	 'ringdown__final_spin:0.6864600000000001' \
+	 'ra: 3.5' \
+	 'dec: 0.73' \
+	 '(delta_tc + t_switch)/0.0017380630900662123:10' \
+	 'inclination:0.5235987755982988' \
