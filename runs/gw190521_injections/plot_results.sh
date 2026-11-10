@@ -2,12 +2,12 @@
 # Generate and run pycbc_inference_plot_posterior scripts, one per run.
 # Edit MODES below to choose which runs to plot. Each entry is either
 #   220            the 220-only run (no ringdown__amp<lmn> parameter),
-#                  read from qnm220-1wavelet/
+#                  read from qnm220-<w>wavelet/
 #   <lmn>[_<lmn>]  one or more extra modes joined by "_", e.g. 330 or 330_210;
 #                  plots ringdown__amp<lmn> for each, read from
-#                  qnm220_<lmn>[_<lmn>]-1wavelet/
+#                  qnm220_<lmn>[_<lmn>]-<w>wavelet/
 # Prefix either form with "d" (e.g. d220, d330, d330_210) to read from the
-# qnmd220...-1wavelet/ directory instead. Those runs also plot
+# qnmd220...-<w>wavelet/ directory instead. Those runs also plot
 # ringdown__dbetarad and ringdown__dphisamp; runs without the "d" do not.
 # The directories are expected next to this script.
 #
@@ -20,12 +20,16 @@
 #
 # A directory with no .hdf file in it is skipped with a message.
 #
+# Edit WAVELETS below to choose the wavelet counts w (1 and/or 2); each one
+# selects the -<w>wavelet directories for every entry in MODES.
+#
 # Usage: ./make_plot_script.sh [--skip-existing]
-#   For each mode, cds into its directory, writes plot_<mode>.sh there and
-#   runs it; the plot wav1_<mode>.png is written next to this script.
+#   For each wavelet count w and mode, cds into its directory, writes
+#   plot_<mode>.sh there and runs it; the plot wav<w>_<mode>.png is written
+#   next to this script.
 #
 # Options:
-#   -s, --skip-existing   skip a mode whose wav1_<mode>.png already exists
+#   -s, --skip-existing   skip a run whose wav<w>_<mode>.png already exists
 #   -h, --help            show this help
 set -euo pipefail
 
@@ -41,7 +45,8 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-MODES=(220 221 210 330 440 330_210 210_320 d220 d221 d210 d330 d440 d330_210 d210_320)
+MODES=(220 210 330 440 330_210 210_320)
+WAVELETS=(1 2)    # wavelet counts to plot: 1, 2 or both, e.g. (1 2)
 INPUT_NAME=""   # e.g. "result.hdf"; empty = auto-detect the one *.hdf file
 EXPECTED_FILE=expected_params.txt
 
@@ -131,9 +136,31 @@ find_input() {
     echo "${files[0]}"
 }
 
+if [[ ${#WAVELETS[@]} -eq 0 ]]; then
+    echo "Error: WAVELETS is empty" >&2
+    exit 1
+fi
+for W in "${WAVELETS[@]}"; do
+    if [[ $W != 1 && $W != 2 ]]; then
+        echo "Error: WAVELETS entries must be 1 or 2 (got '$W')" >&2
+        exit 1
+    fi
+done
+
+# Every (wavelet count, mode) pair to plot, as "<w>:<mode>".
+JOBS=()
+for W in "${WAVELETS[@]}"; do
+    for MODE in "${MODES[@]}"; do
+        JOBS+=("$W:$MODE")
+    done
+done
+
 SKIPPED=()
 SKIPPED_EXISTING=()
-for MODE in "${MODES[@]}"; do
+for JOB in "${JOBS[@]}"; do
+    W=${JOB%%:*}
+    MODE=${JOB#*:}
+    TAG=wav${W}_${MODE}   # names this run in messages and the plot file
     if [[ ! $MODE =~ ^d?[0-9]{3}(_[0-9]{3})*$ ]]; then
         echo "Error: '$MODE' is not [d]220 or a '_'-separated list of three-digit" \
              "lmn strings, optionally prefixed with d" >&2
@@ -150,25 +177,25 @@ for MODE in "${MODES[@]}"; do
     fi
 
     if [[ $BASE == 220 ]]; then
-        DIR=qnm${D}220-1wavelet
+        DIR=qnm${D}220-${W}wavelet
         AMPS=()
     else
-        DIR=qnm${D}220_${BASE}-1wavelet
+        DIR=qnm${D}220_${BASE}-${W}wavelet
         IFS=_ read -r -a AMPS <<< "$BASE"
     fi
 
-    PNG=wav1_${MODE}.png
+    PNG=${TAG}.png
     if [[ $SKIP_EXISTING -eq 1 && -f $PNG ]]; then
-        echo "Skipping $MODE: $PNG already exists"
-        SKIPPED_EXISTING+=("$MODE")
+        echo "Skipping $TAG: $PNG already exists"
+        SKIPPED_EXISTING+=("$TAG")
         continue
     fi
 
     RC=0
     INPUT=$(find_input "$DIR") || RC=$?
     if [[ $RC -eq 2 ]]; then
-        echo "Skipping $MODE: no .hdf file in $DIR"
-        SKIPPED+=("$MODE")
+        echo "Skipping $TAG: no .hdf file in $DIR"
+        SKIPPED+=("$TAG")
         continue
     elif [[ $RC -ne 0 ]]; then
         exit "$RC"
@@ -182,16 +209,16 @@ for MODE in "${MODES[@]}"; do
     # ringdown__amp<lmn>, the time parameter, the remaining parameters (with
     # dbetarad/dphisamp only for "d" runs), the
     # expected-parameters section and the plot options. The quoted heredocs
-    # are written verbatim; only @MODE@ is substituted.
+    # are written verbatim; only @PNG@ is substituted.
     {
-        sed "s/@MODE@/${MODE}/g" <<'EOF'
+        sed "s/@PNG@/${PNG}/g" <<'EOF'
 #!/usr/bin/env bash
 FILENAME=$1
 NAME=${FILENAME%%.*}
 
 pycbc_inference_plot_posterior \
         --input-file $FILENAME \
-        --output-file ../wav1_@MODE@.png \
+        --output-file ../@PNG@ \
         --parameters \
                 'ringdown__final_mass:$M_f$' \
                 'ringdown__final_spin:$\chi_f$' \
@@ -242,3 +269,4 @@ fi
 if [[ ${#SKIPPED_EXISTING[@]} -gt 0 ]]; then
     echo "Skipped (png already exists): ${SKIPPED_EXISTING[*]}"
 fi
+

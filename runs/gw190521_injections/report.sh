@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 # Collect the evidence comparison and the posterior plots into one Markdown file.
 #
+# Run this from the directory holding the wav1_*.png and wav2_*.png plots. It reads the saved
+# output of compare_evidence.py, e.g.
+#     ./compare_evidence.py > evidences.txt
+# and writes:
+#   1. a table of every run's log evidence and its difference from the
+#      matching 220-only run,
+#   2. the 220-only reference evidences,
+#   3. any runs compare_evidence.py skipped,
+#   4. every wav1_*.png and wav2_*.png plot, linked by its absolute path,
+#      each under a title naming its modes (and the wavelet count, if not 1),
+#      title naming its modes, e.g.
+#      wav1_221.png -> "220+221", wav1_d221.png -> "220+221, negative mode",
+#      wav2_d221.png -> "220+221, negative mode, 2 wavelet".
+#
 # Usage: ./make_report.sh [evidence_file] [output_file]
 #   evidence_file  default: evidences.txt
 #   output_file    default: results.md
@@ -94,11 +108,12 @@ if ! grep -q '^ROW' <<< "$RECORDS" && ! grep -q '^REF' <<< "$RECORDS"; then
     exit 1
 fi
 
-# Plot order: the 220-only plot first, then the other plots, for the runs
-# without dbeta/dphi and then for the "d" runs.
+# Plot order: all 1-wavelet plots, then all 2-wavelet plots. Within each,
+# the 220-only plot first, then the other plots, for the runs without
+# dbeta/dphi and then for the "d" runs.
 ordered_plots() {
     local prefix f
-    for prefix in wav1_ wav1_d; do
+    for prefix in wav1_ wav1_d wav2_ wav2_d; do
         [[ -f ${prefix}220.png ]] && echo "${prefix}220.png"
         for f in "$prefix"[0-9]*.png; do
             [[ -f $f && $f != "${prefix}220.png" ]] && echo "$f"
@@ -112,11 +127,10 @@ ordered_plots() {
     echo
     echo "## Log evidence"
     echo
-    echo "ln B is each run's Bayes factor against the 220-only 1-wavelet run."
-    echo "Runs with/out symmetry breaking are compared to the corresponding reference with/out the same parameters."
-    echo "The raw evidences for the 220-only references are printed below."
+    echo "Δ ln Z is each run's log evidence minus that of the matching 220-only run"
+    echo "(the natural-log Bayes factor against the 220-only model)."
     echo
-    echo "| Modes | ln Z | ln B |"
+    echo "| Modes | ln Z | Δ ln Z |"
     echo "|---|---:|---:|"
     while IFS=$'\t' read -r kind dir lnz diff base; do
         [[ $kind == ROW ]] || continue
@@ -147,17 +161,22 @@ ordered_plots() {
     PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
     if [[ -z $PLOTS ]]; then
         echo
-        echo "No wav1_*.png plots found."
+        echo "No wav1_*.png or wav2_*.png plots found."
     fi
     while IFS= read -r png; do
         [[ -n $png ]] || continue
-        mode=${png#wav1_}
+        w=${png#wav}
+        w=${w%%_*}
+        mode=${png#wav*_}
         mode=${mode%.png}
         title=$(mode_title "$mode")
+        if [[ $w != 1 ]]; then
+            title="$title, $w wavelet"
+        fi
         echo
         echo "### $title"
         echo
-        path=$PLOT_DIR/$png
+        path=$png
         # Markdown link targets can't contain spaces unless wrapped in <...>.
         if [[ $path == *" "* ]]; then
             echo "![$title](<$path>)"
@@ -168,3 +187,4 @@ ordered_plots() {
 } > "$OUTPUT_FILE"
 
 echo "Wrote $OUTPUT_FILE"
+
