@@ -23,4 +23,16 @@ Currently only contains `gw190521` for GW190521-like zero-noise injections. Each
 The `psds` top-level directory contains PSDs extracted from the real data of GW190521, and is used to estimate the PSDs for zero-noise simulations.
 
 The `runs` top-level directory contains results. Locally, this should also be the place where analyses are run and stored.
-Injection results are stored in `gw190521_injections`. See corresponding README for that directory's file structure.
+Injection results are stored in `gw190521_injections`.
+
+Each injection's run results can be found at the following:
+
+[q = 1, nonspinning, snr = 15](https://github.com/acorreia61201/fundamental_mode_analysis/blob/main/runs/gw190521_injections/nrsur_q1_nonspin_snr20/results.md)
+
+[q = 4, nonspinning, snr = 15](https://github.com/acorreia61201/fundamental_mode_analysis/blob/main/runs/gw190521_injections/nrsur_q4_nonspin_snr20/results.md)
+
+[q = 4, nonspinning, snr = 30](https://github.com/acorreia61201/fundamental_mode_analysis/blob/main/runs/gw190521_injections/nrsur_q4_nonspin_snr30/results.md)
+
+[q = 8, nonspinning, snr = 15](https://github.com/acorreia61201/fundamental_mode_analysis/blob/main/runs/gw190521_injections/seobnr_q8_nonspin_snr20/results.md) (in progress)
+
+[q = 4, precessing, snr = 15](https://github.com/acorreia61201/fundamental_mode_analysis/blob/main/runs/gw190521_injections/sxs_q1_prec_snr20/results.md) (in progress)
