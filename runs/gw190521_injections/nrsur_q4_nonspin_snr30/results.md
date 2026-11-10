@@ -2,11 +2,10 @@
 
 ## Log evidence
 
-ln B is each run's Bayes factor against the 220-only 1-wavelet run.
-Runs with/out symmetry breaking are compared to the corresponding reference with/out the same parameters.
-The raw evidences for the 220-only references are printed below.
+Δ ln Z is each run's log evidence minus that of the matching 220-only run
+(the natural-log Bayes factor against the 220-only model).
 
-| Modes | ln Z | ln B |
+| Modes | ln Z | Δ ln Z |
 |---|---:|---:|
 | 220, 2 wavelet | 6433350.413 ± 0.092 | 56.599 ± 0.110 |
 | 220+210 | 6433330.698 ± 0.071 | 36.884 ± 0.093 |
@@ -81,3 +80,7 @@ The raw evidences for the 220-only references are printed below.
 ### 220+330
 
 ![220+330](wav1_330.png)
+
+### 220, 2 wavelet
+
+![220, 2 wavelet](wav2_220.png)
