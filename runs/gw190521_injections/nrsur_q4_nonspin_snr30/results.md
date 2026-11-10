@@ -1,0 +1,83 @@
+# Ringdown mode comparison
+
+## Log evidence
+
+ln B is each run's Bayes factor against the 220-only 1-wavelet run.
+Runs with/out symmetry breaking are compared to the corresponding reference with/out the same parameters.
+The raw evidences for the 220-only references are printed below.
+
+| Modes | ln Z | ln B |
+|---|---:|---:|
+| 220, 2 wavelet | 6433350.413 ± 0.092 | 56.599 ± 0.110 |
+| 220+210 | 6433330.698 ± 0.071 | 36.884 ± 0.093 |
+| 220+210+320 | 6433377.321 ± 0.051 | 83.507 ± 0.078 |
+| 220+221 | 6433317.978 ± 0.078 | 24.164 ± 0.098 |
+| 220+330 | 6433366.526 ± 0.055 | 72.712 ± 0.081 |
+
+### 220-only reference evidence
+
+| Modes | ln Z |
+|---|---:|
+| 220 | 6433293.814 ± 0.059 |
+| 220, negative mode | not available |
+
+### Skipped runs
+
+- qnm220-3wavelet: no .hdf file
+- qnm220_210-2wavelet: no .hdf file
+- qnm220_210-3wavelet: no .hdf file
+- qnm220_210_320-2wavelet: no .hdf file
+- qnm220_210_320-3wavelet: no .hdf file
+- qnm220_221-2wavelet: no .hdf file
+- qnm220_221-3wavelet: no .hdf file
+- qnm220_330-2wavelet: no .hdf file
+- qnm220_330-3wavelet: no .hdf file
+- qnm220_330_210-1wavelet: no .hdf file
+- qnm220_330_210-2wavelet: no .hdf file
+- qnm220_330_210-3wavelet: no .hdf file
+- qnm220_440-1wavelet: no .hdf file
+- qnm220_440-2wavelet: no .hdf file
+- qnm220_440-3wavelet: no .hdf file
+- qnmd220-1wavelet: no .hdf file
+- qnmd220-2wavelet: no .hdf file
+- qnmd220-3wavelet: no .hdf file
+- qnmd220_210-1wavelet: no .hdf file
+- qnmd220_210-2wavelet: no .hdf file
+- qnmd220_210-3wavelet: no .hdf file
+- qnmd220_210_320-1wavelet: no .hdf file
+- qnmd220_210_320-2wavelet: no .hdf file
+- qnmd220_210_320-3wavelet: no .hdf file
+- qnmd220_221-1wavelet: no .hdf file
+- qnmd220_221-2wavelet: no .hdf file
+- qnmd220_221-3wavelet: no .hdf file
+- qnmd220_330-1wavelet: no .hdf file
+- qnmd220_330-2wavelet: no .hdf file
+- qnmd220_330-3wavelet: no .hdf file
+- qnmd220_330_210-1wavelet: no .hdf file
+- qnmd220_330_210-2wavelet: no .hdf file
+- qnmd220_330_210-3wavelet: no .hdf file
+- qnmd220_440-1wavelet: no .hdf file
+- qnmd220_440-2wavelet: no .hdf file
+- qnmd220_440-3wavelet: no .hdf file
+
+## Posterior plots
+
+### 220
+
+![220](wav1_220.png)
+
+### 220+210+320
+
+![220+210+320](wav1_210_320.png)
+
+### 220+210
+
+![220+210](wav1_210.png)
+
+### 220+221
+
+![220+221](wav1_221.png)
+
+### 220+330
+
+![220+330](wav1_330.png)

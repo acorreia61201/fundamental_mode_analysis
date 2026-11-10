@@ -31,6 +31,7 @@ The raw evidences for the 220-only references are printed below.
 | 220+330, negative mode | 6433470.426 ± 0.041 | 0.181 ± 0.058 |
 | 220+330, negative mode, 2 wavelet | 6433468.199 ± 0.022 | -2.045 ± 0.047 |
 | 220+330+210, negative mode | 6433471.046 ± 0.066 | 0.802 ± 0.078 |
+| 220+330+210, negative mode, 2 wavelet | 6433468.420 ± 0.055 | -1.824 ± 0.068 |
 | 220+440, negative mode | 6433469.535 ± 0.044 | -0.709 ± 0.060 |
 | 220+440, negative mode, 2 wavelet | 6433467.290 ± 0.067 | -2.954 ± 0.078 |
 
@@ -55,7 +56,6 @@ The raw evidences for the 220-only references are printed below.
 - qnmd220_210_320-3wavelet: no .hdf file
 - qnmd220_221-3wavelet: no .hdf file
 - qnmd220_330-3wavelet: no .hdf file
-- qnmd220_330_210-2wavelet: no .hdf file
 - qnmd220_330_210-3wavelet: no .hdf file
 - qnmd220_440-3wavelet: no .hdf file
 

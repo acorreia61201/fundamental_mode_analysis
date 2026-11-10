@@ -10,9 +10,7 @@ Skipping qnmd220_210-3wavelet: no .hdf file
 Skipping qnmd220_210_320-3wavelet: no .hdf file
 Skipping qnmd220_221-3wavelet: no .hdf file
 Skipping qnmd220_330-3wavelet: no .hdf file
-Skipping qnmd220_330_210-2wavelet: no .hdf file
 Skipping qnmd220_330_210-3wavelet: no .hdf file
-Skipping qnmd220_440-2wavelet: no .hdf file
 Skipping qnmd220_440-3wavelet: no .hdf file
 
 220-only log evidence
@@ -44,4 +42,6 @@ Log evidence relative to the matching 220-only run
   qnmd220_330-1wavelet            6433470.426 +/- 0.041           0.181 +/- 0.058    qnmd220-1wavelet
   qnmd220_330-2wavelet            6433468.199 +/- 0.022          -2.045 +/- 0.047    qnmd220-1wavelet
   qnmd220_330_210-1wavelet        6433471.046 +/- 0.066           0.802 +/- 0.078    qnmd220-1wavelet
+  qnmd220_330_210-2wavelet        6433468.420 +/- 0.055          -1.824 +/- 0.068    qnmd220-1wavelet
   qnmd220_440-1wavelet            6433469.535 +/- 0.044          -0.709 +/- 0.060    qnmd220-1wavelet
+  qnmd220_440-2wavelet            6433467.290 +/- 0.067          -2.954 +/- 0.078    qnmd220-1wavelet
