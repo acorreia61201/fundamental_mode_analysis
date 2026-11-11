@@ -1,25 +1,16 @@
 Skipping qnm220-3wavelet: no .hdf file
 Skipping qnm220_210-3wavelet: no .hdf file
-Skipping qnm220_210_320-2wavelet: no .hdf file
 Skipping qnm220_210_320-3wavelet: no .hdf file
 Skipping qnm220_221-3wavelet: no .hdf file
 Skipping qnm220_330-3wavelet: no .hdf file
-Skipping qnm220_330_210-2wavelet: no .hdf file
 Skipping qnm220_330_210-3wavelet: no .hdf file
-Skipping qnm220_440-2wavelet: no .hdf file
 Skipping qnm220_440-3wavelet: no .hdf file
-Skipping qnmd220-2wavelet: no .hdf file
 Skipping qnmd220-3wavelet: no .hdf file
-Skipping qnmd220_210-1wavelet: no .hdf file
 Skipping qnmd220_210-2wavelet: no .hdf file
 Skipping qnmd220_210-3wavelet: no .hdf file
-Skipping qnmd220_210_320-1wavelet: no .hdf file
 Skipping qnmd220_210_320-2wavelet: no .hdf file
 Skipping qnmd220_210_320-3wavelet: no .hdf file
-Skipping qnmd220_221-1wavelet: no .hdf file
-Skipping qnmd220_221-2wavelet: no .hdf file
 Skipping qnmd220_221-3wavelet: no .hdf file
-Skipping qnmd220_330-1wavelet: no .hdf file
 Skipping qnmd220_330-2wavelet: no .hdf file
 Skipping qnmd220_330-3wavelet: no .hdf file
 Skipping qnmd220_330_210-1wavelet: no .hdf file
@@ -39,9 +30,18 @@ Log evidence relative to the matching 220-only run
   qnm220_210-1wavelet             6433330.698 +/- 0.071          36.884 +/- 0.093    qnm220-1wavelet
   qnm220_210-2wavelet             6433364.804 +/- 0.074          70.990 +/- 0.095    qnm220-1wavelet
   qnm220_210_320-1wavelet         6433377.321 +/- 0.051          83.507 +/- 0.078    qnm220-1wavelet
+  qnm220_210_320-2wavelet         6433396.619 +/- 0.082         102.805 +/- 0.102    qnm220-1wavelet
   qnm220_221-1wavelet             6433317.978 +/- 0.078          24.164 +/- 0.098    qnm220-1wavelet
   qnm220_221-2wavelet             6433376.365 +/- 0.071          82.551 +/- 0.093    qnm220-1wavelet
   qnm220_330-1wavelet             6433366.526 +/- 0.055          72.712 +/- 0.081    qnm220-1wavelet
   qnm220_330-2wavelet             6433401.590 +/- 0.083         107.776 +/- 0.102    qnm220-1wavelet
   qnm220_330_210-1wavelet         6433389.084 +/- 0.055          95.270 +/- 0.081    qnm220-1wavelet
+  qnm220_330_210-2wavelet         6433403.172 +/- 0.076         109.358 +/- 0.096    qnm220-1wavelet
   qnm220_440-1wavelet             6433330.275 +/- 0.048          36.461 +/- 0.077    qnm220-1wavelet
+  qnm220_440-2wavelet             6433360.889 +/- 0.072          67.075 +/- 0.093    qnm220-1wavelet
+  qnmd220-2wavelet                6433353.647 +/- 0.081          59.405 +/- 0.099    qnmd220-1wavelet
+  qnmd220_210-1wavelet            6433333.446 +/- 0.062          39.204 +/- 0.084    qnmd220-1wavelet
+  qnmd220_210_320-1wavelet        6433382.300 +/- 0.071          88.058 +/- 0.091    qnmd220-1wavelet
+  qnmd220_221-1wavelet            6433313.380 +/- 0.015          19.138 +/- 0.059    qnmd220-1wavelet
+  qnmd220_221-2wavelet            6433380.214 +/- 0.074          85.973 +/- 0.094    qnmd220-1wavelet
+  qnmd220_330-1wavelet            6433366.386 +/- 0.053          72.144 +/- 0.078    qnmd220-1wavelet
