@@ -1,0 +1,48 @@
+Skipping qnm220-3wavelet: no .hdf file
+Skipping qnm220_210-2wavelet: no .hdf file
+Skipping qnm220_210-3wavelet: no .hdf file
+Skipping qnm220_210_320-1wavelet: no .hdf file
+Skipping qnm220_210_320-2wavelet: no .hdf file
+Skipping qnm220_210_320-3wavelet: no .hdf file
+Skipping qnm220_221-1wavelet: no .hdf file
+Skipping qnm220_221-2wavelet: no .hdf file
+Skipping qnm220_221-3wavelet: no .hdf file
+Skipping qnm220_330-1wavelet: no .hdf file
+Skipping qnm220_330-2wavelet: no .hdf file
+Skipping qnm220_330-3wavelet: no .hdf file
+Skipping qnm220_330_210-1wavelet: no .hdf file
+Skipping qnm220_330_210-2wavelet: no .hdf file
+Skipping qnm220_330_210-3wavelet: no .hdf file
+Skipping qnm220_440-1wavelet: no .hdf file
+Skipping qnm220_440-2wavelet: no .hdf file
+Skipping qnm220_440-3wavelet: no .hdf file
+Skipping qnmd220-1wavelet: no .hdf file
+Skipping qnmd220-2wavelet: no .hdf file
+Skipping qnmd220-3wavelet: no .hdf file
+Skipping qnmd220_210-1wavelet: no .hdf file
+Skipping qnmd220_210-2wavelet: no .hdf file
+Skipping qnmd220_210-3wavelet: no .hdf file
+Skipping qnmd220_210_320-1wavelet: no .hdf file
+Skipping qnmd220_210_320-2wavelet: no .hdf file
+Skipping qnmd220_210_320-3wavelet: no .hdf file
+Skipping qnmd220_221-1wavelet: no .hdf file
+Skipping qnmd220_221-2wavelet: no .hdf file
+Skipping qnmd220_221-3wavelet: no .hdf file
+Skipping qnmd220_330-1wavelet: no .hdf file
+Skipping qnmd220_330-2wavelet: no .hdf file
+Skipping qnmd220_330-3wavelet: no .hdf file
+Skipping qnmd220_330_210-1wavelet: no .hdf file
+Skipping qnmd220_330_210-2wavelet: no .hdf file
+Skipping qnmd220_330_210-3wavelet: no .hdf file
+Skipping qnmd220_440-1wavelet: no .hdf file
+Skipping qnmd220_440-2wavelet: no .hdf file
+Skipping qnmd220_440-3wavelet: no .hdf file
+
+220-only log evidence
+  qnm220-1wavelet                ln Z = 6433462.356 +/- 0.016
+  qnmd220-1wavelet               not available
+
+Log evidence relative to the matching 220-only run
+  directory                                        ln Z          ln Z - ln Z_220   compared with
+  qnm220-2wavelet                 6433462.562 +/- 0.044           0.206 +/- 0.046    qnm220-1wavelet
+  qnm220_210-1wavelet             6433462.221 +/- 0.065          -0.135 +/- 0.067    qnm220-1wavelet
