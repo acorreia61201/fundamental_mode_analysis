@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 # Generate and run pycbc_inference_plot_posterior scripts, one per run.
-# Edit MODES below to choose which runs to plot. Each entry is either
-#   220            the 220-only run (no ringdown__amp<lmn> parameter),
-#                  read from qnm220-<w>wavelet/
-#   <lmn>[_<lmn>]  one or more extra modes joined by "_", e.g. 330 or 330_210;
-#                  plots ringdown__amp<lmn> for each, read from
-#                  qnm220_<lmn>[_<lmn>]-<w>wavelet/
-# Prefix either form with "d" (e.g. d220, d330, d330_210) to read from the
-# qnmd220...-<w>wavelet/ directory instead. Those runs also plot
-# ringdown__dbetarad and ringdown__dphisamp; runs without the "d" do not.
-# The directories are expected next to this script.
+#
+# Three lists below choose which runs to plot; every combination is tried:
+#   MODES     the modes in addition to the 220. Each entry is either
+#               220            the 220-only run (no ringdown__amp<lmn> parameter)
+#               <lmn>[_<lmn>]  one or more extra modes joined by "_", e.g. 221,
+#                              330 or 330_210; plots ringdown__amp<lmn> for each
+#   PREFIXES  qnm and/or qnmd. qnmd runs also plot ringdown__dbetarad and
+#             ringdown__dphisamp; qnm runs do not.
+#   WAVELETS  the wavelet counts w, any positive integers, e.g. (1 2 3)
+# Each combination is read from the directory
+#   <prefix>220-<w>wavelet/          for MODES entry 220
+#   <prefix>220_<lmn>-<w>wavelet/    otherwise, e.g. qnmd220_330_210-2wavelet/
+# and plotted to wav<w>_<mode>.png, with "d" before the mode for qnmd runs,
+# e.g. wav1_330.png, wav2_d330_210.png. The directories are expected next to
+# this script.
 #
 # If INPUT_NAME is empty, the single *.hdf file in each directory is used;
 # set INPUT_NAME to pick a specific file name.
@@ -20,16 +25,12 @@
 #
 # A directory with no .hdf file in it is skipped with a message.
 #
-# Edit WAVELETS below to choose the wavelet counts w (1 and/or 2); each one
-# selects the -<w>wavelet directories for every entry in MODES.
-#
 # Usage: ./make_plot_script.sh [--skip-existing]
-#   For each wavelet count w and mode, cds into its directory, writes
-#   plot_<mode>.sh there and runs it; the plot wav<w>_<mode>.png is written
-#   next to this script.
+#   For each run, cds into its directory, writes plot_<mode>.sh there and
+#   runs it; the plot is written next to this script.
 #
 # Options:
-#   -s, --skip-existing   skip a run whose wav<w>_<mode>.png already exists
+#   -s, --skip-existing   skip a run whose plot already exists
 #   -h, --help            show this help
 set -euo pipefail
 
@@ -45,8 +46,9 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-MODES=(220 210 330 440 330_210 210_320)
-WAVELETS=(1 2)    # wavelet counts to plot: 1, 2 or both, e.g. (1 2)
+MODES=(220 210 221 330 440 330_210 210_320)
+PREFIXES=(qnm qnmd)  # qnm, qnmd or both, e.g. (qnm qnmd)
+WAVELETS=(1 2 3)    # wavelet counts to plot, e.g. (1 2)
 INPUT_NAME=""   # e.g. "result.hdf"; empty = auto-detect the one *.hdf file
 EXPECTED_FILE=expected_params.txt
 
@@ -136,52 +138,62 @@ find_input() {
     echo "${files[0]}"
 }
 
-if [[ ${#WAVELETS[@]} -eq 0 ]]; then
-    echo "Error: WAVELETS is empty" >&2
-    exit 1
-fi
+for LIST in MODES PREFIXES WAVELETS; do
+    if eval "[[ \${#$LIST[@]} -eq 0 ]]"; then
+        echo "Error: $LIST is empty" >&2
+        exit 1
+    fi
+done
+for MODE in "${MODES[@]}"; do
+    if [[ ! $MODE =~ ^[0-9]{3}(_[0-9]{3})*$ ]]; then
+        echo "Error: MODES entry '$MODE' is not 220 or a '_'-separated list of" \
+             "three-digit lmn strings (use PREFIXES for qnmd runs)" >&2
+        exit 1
+    fi
+done
+for PREFIX in "${PREFIXES[@]}"; do
+    if [[ $PREFIX != qnm && $PREFIX != qnmd ]]; then
+        echo "Error: PREFIXES entries must be qnm or qnmd (got '$PREFIX')" >&2
+        exit 1
+    fi
+done
 for W in "${WAVELETS[@]}"; do
-    if [[ $W != 1 && $W != 2 ]]; then
-        echo "Error: WAVELETS entries must be 1 or 2 (got '$W')" >&2
+    if [[ ! $W =~ ^[1-9][0-9]*$ ]]; then
+        echo "Error: WAVELETS entries must be positive integers (got '$W')" >&2
         exit 1
     fi
 done
 
-# Every (wavelet count, mode) pair to plot, as "<w>:<mode>".
+# Every (wavelet count, prefix, mode) combination to plot, as
+# "<w>:<prefix>:<mode>".
 JOBS=()
 for W in "${WAVELETS[@]}"; do
-    for MODE in "${MODES[@]}"; do
-        JOBS+=("$W:$MODE")
+    for PREFIX in "${PREFIXES[@]}"; do
+        for MODE in "${MODES[@]}"; do
+            JOBS+=("$W:$PREFIX:$MODE")
+        done
     done
 done
 
 SKIPPED=()
 SKIPPED_EXISTING=()
 for JOB in "${JOBS[@]}"; do
-    W=${JOB%%:*}
-    MODE=${JOB#*:}
-    TAG=wav${W}_${MODE}   # names this run in messages and the plot file
-    if [[ ! $MODE =~ ^d?[0-9]{3}(_[0-9]{3})*$ ]]; then
-        echo "Error: '$MODE' is not [d]220 or a '_'-separated list of three-digit" \
-             "lmn strings, optionally prefixed with d" >&2
-        exit 1
-    fi
+    IFS=: read -r W PREFIX MODE <<< "$JOB"
 
-    # A leading "d" selects the qnmd220... directories and the extra
-    # dbetarad/dphisamp parameters.
+    # qnmd runs get the extra dbetarad/dphisamp parameters and a "d" before
+    # the mode in the plot and script names.
     D=""
-    BASE=$MODE
-    if [[ $MODE == d* ]]; then
+    if [[ $PREFIX == qnmd ]]; then
         D=d
-        BASE=${MODE#d}
     fi
+    TAG=wav${W}_${D}${MODE}   # names this run in messages and the plot file
 
-    if [[ $BASE == 220 ]]; then
-        DIR=qnm${D}220-${W}wavelet
+    if [[ $MODE == 220 ]]; then
+        DIR=${PREFIX}220-${W}wavelet
         AMPS=()
     else
-        DIR=qnm${D}220_${BASE}-${W}wavelet
-        IFS=_ read -r -a AMPS <<< "$BASE"
+        DIR=${PREFIX}220_${MODE}-${W}wavelet
+        IFS=_ read -r -a AMPS <<< "$MODE"
     fi
 
     PNG=${TAG}.png
@@ -201,13 +213,13 @@ for JOB in "${JOBS[@]}"; do
         exit "$RC"
     fi
     INPUT=${INPUT##*/}   # file name only, since we run from inside $DIR
-    OUT=plot_${MODE}.sh
+    OUT=plot_${D}${MODE}.sh
 
     cd "$DIR"
 
     # The script is assembled from pieces: the header, one line per
     # ringdown__amp<lmn>, the time parameter, the remaining parameters (with
-    # dbetarad/dphisamp only for "d" runs), the
+    # dbetarad/dphisamp only for qnmd runs), the
     # expected-parameters section and the plot options. The quoted heredocs
     # are written verbatim; only @PNG@ is substituted.
     {
@@ -240,8 +252,6 @@ EOF
                 'ringdown__dphisamp - pi:$\Delta \phi$' \
 EOF
         fi
-        cat <<'EOF'
-EOF
         printf '%s\n' "$EXPECTED_BLOCK"
         cat <<'EOF'
         --plot-scatter \
