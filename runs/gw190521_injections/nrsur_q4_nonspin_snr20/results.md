@@ -128,6 +128,10 @@
 
 ![220+210, 2 wavelet](wav2_210.png)
 
+### 220+221, 2 wavelet
+
+![220+221, 2 wavelet](wav2_221.png)
+
 ### 220+330+210, 2 wavelet
 
 ![220+330+210, 2 wavelet](wav2_330_210.png)
@@ -139,3 +143,31 @@
 ### 220+440, 2 wavelet
 
 ![220+440, 2 wavelet](wav2_440.png)
+
+### 220, negative mode, 2 wavelet
+
+![220, negative mode, 2 wavelet](wav2_d220.png)
+
+### 220+210+320, negative mode, 2 wavelet
+
+![220+210+320, negative mode, 2 wavelet](wav2_d210_320.png)
+
+### 220+210, negative mode, 2 wavelet
+
+![220+210, negative mode, 2 wavelet](wav2_d210.png)
+
+### 220+221, negative mode, 2 wavelet
+
+![220+221, negative mode, 2 wavelet](wav2_d221.png)
+
+### 220+330+210, negative mode, 2 wavelet
+
+![220+330+210, negative mode, 2 wavelet](wav2_d330_210.png)
+
+### 220+330, negative mode, 2 wavelet
+
+![220+330, negative mode, 2 wavelet](wav2_d330.png)
+
+### 220+440, negative mode, 2 wavelet
+
+![220+440, negative mode, 2 wavelet](wav2_d440.png)
