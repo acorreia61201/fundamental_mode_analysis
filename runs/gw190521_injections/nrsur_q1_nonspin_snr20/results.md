@@ -2,7 +2,7 @@
 
 ## Combined posterior from all runs
 
-![Combined posterior from all runs](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/combined_common.png)
+![Combined posterior from all runs](combined_common.png)
 
 ## Log evidence
 
@@ -66,116 +66,116 @@
 
 ### 220
 
-![220](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_220.png)
+![220](wav1_220.png)
 
 ### 220+210+320
 
-![220+210+320](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_210_320.png)
+![220+210+320](wav1_210_320.png)
 
 ### 220+210
 
-![220+210](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_210.png)
+![220+210](wav1_210.png)
 
 ### 220+221
 
-![220+221](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_221.png)
+![220+221](wav1_221.png)
 
 ### 220+330+210
 
-![220+330+210](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_330_210.png)
+![220+330+210](wav1_330_210.png)
 
 ### 220+330
 
-![220+330](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_330.png)
+![220+330](wav1_330.png)
 
 ### 220+440
 
-![220+440](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_440.png)
+![220+440](wav1_440.png)
 
 ### 220, negative mode
 
-![220, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d220.png)
+![220, negative mode](wav1_d220.png)
 
 ### 220+210+320, negative mode
 
-![220+210+320, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d210_320.png)
+![220+210+320, negative mode](wav1_d210_320.png)
 
 ### 220+210, negative mode
 
-![220+210, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d210.png)
+![220+210, negative mode](wav1_d210.png)
 
 ### 220+221, negative mode
 
-![220+221, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d221.png)
+![220+221, negative mode](wav1_d221.png)
 
 ### 220+330+210, negative mode
 
-![220+330+210, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d330_210.png)
+![220+330+210, negative mode](wav1_d330_210.png)
 
 ### 220+330, negative mode
 
-![220+330, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d330.png)
+![220+330, negative mode](wav1_d330.png)
 
 ### 220+440, negative mode
 
-![220+440, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav1_d440.png)
+![220+440, negative mode](wav1_d440.png)
 
 ### 220, 2 wavelet
 
-![220, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_220.png)
+![220, 2 wavelet](wav2_220.png)
 
 ### 220+210+320, 2 wavelet
 
-![220+210+320, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_210_320.png)
+![220+210+320, 2 wavelet](wav2_210_320.png)
 
 ### 220+210, 2 wavelet
 
-![220+210, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_210.png)
+![220+210, 2 wavelet](wav2_210.png)
 
 ### 220+221, 2 wavelet
 
-![220+221, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_221.png)
+![220+221, 2 wavelet](wav2_221.png)
 
 ### 220+330+210, 2 wavelet
 
-![220+330+210, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_330_210.png)
+![220+330+210, 2 wavelet](wav2_330_210.png)
 
 ### 220+330, 2 wavelet
 
-![220+330, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_330.png)
+![220+330, 2 wavelet](wav2_330.png)
 
 ### 220+440, 2 wavelet
 
-![220+440, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_440.png)
+![220+440, 2 wavelet](wav2_440.png)
 
 ### 220, negative mode, 2 wavelet
 
-![220, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d220.png)
+![220, negative mode, 2 wavelet](wav2_d220.png)
 
 ### 220+210+320, negative mode, 2 wavelet
 
-![220+210+320, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d210_320.png)
+![220+210+320, negative mode, 2 wavelet](wav2_d210_320.png)
 
 ### 220+210, negative mode, 2 wavelet
 
-![220+210, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d210.png)
+![220+210, negative mode, 2 wavelet](wav2_d210.png)
 
 ### 220+221, negative mode, 2 wavelet
 
-![220+221, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d221.png)
+![220+221, negative mode, 2 wavelet](wav2_d221.png)
 
 ### 220+330+210, negative mode, 2 wavelet
 
-![220+330+210, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d330_210.png)
+![220+330+210, negative mode, 2 wavelet](wav2_d330_210.png)
 
 ### 220+330, negative mode, 2 wavelet
 
-![220+330, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d330.png)
+![220+330, negative mode, 2 wavelet](wav2_d330.png)
 
 ### 220+440, negative mode, 2 wavelet
 
-![220+440, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav2_d440.png)
+![220+440, negative mode, 2 wavelet](wav2_d440.png)
 
 ### 220+210+320, 3 wavelet
 
-![220+210+320, 3 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/nrsur_q1_nonspin_snr20/wav3_210_320.png)
+![220+210+320, 3 wavelet](wav3_210_320.png)

@@ -140,7 +140,6 @@ ordered_plots() {
     return 0
 }
 
-PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
 COMBINED_PLOT=combined_common.png
 COMBINED_TITLE="Combined posterior from all runs"
 if [[ ! -f $COMBINED_PLOT ]]; then
@@ -150,7 +149,7 @@ fi
 # Markdown image line for a plot in PLOT_DIR. Link targets can't contain
 # spaces unless wrapped in <...>.
 image_line() {
-    local title=$1 path=$PLOT_DIR/$2
+    local title=$1 path=$2
     if [[ $path == *" "* ]]; then
         echo "![$title](<$path>)"
     else
