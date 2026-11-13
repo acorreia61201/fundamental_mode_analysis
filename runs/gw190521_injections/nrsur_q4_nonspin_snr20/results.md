@@ -1,5 +1,9 @@
 # Ringdown mode comparison
 
+## Combined posterior from all runs
+
+![Combined posterior from all runs](combined_common.png)
+
 ## Log evidence
 
 Δ ln Z is each run's log evidence minus that of the matching 220-only run

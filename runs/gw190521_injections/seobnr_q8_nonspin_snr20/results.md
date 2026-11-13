@@ -1,5 +1,9 @@
 # Ringdown mode comparison
 
+## Combined posterior from all runs
+
+![Combined posterior from all runs](combined_common.png)
+
 ## Log evidence
 
 Δ ln Z is each run's log evidence minus that of the matching 220-only run
@@ -30,6 +34,7 @@
 | 220+330, negative mode | 6433464.352 ± 0.046 | 2.094 ± 0.066 |
 | 220+330, negative mode, 2 wavelet | 6433463.486 ± 0.077 | 1.228 ± 0.090 |
 | 220+330+210, negative mode | 6433465.442 ± 0.043 | 3.184 ± 0.064 |
+| 220+330+210, negative mode, 2 wavelet | 6433463.573 ± 0.060 | 1.316 ± 0.076 |
 | 220+440, negative mode | 6433463.100 ± 0.051 | 0.842 ± 0.069 |
 | 220+440, negative mode, 2 wavelet | 6433462.329 ± 0.075 | 0.071 ± 0.089 |
 
@@ -54,7 +59,6 @@
 - qnmd220_210_320-3wavelet: no .hdf file
 - qnmd220_221-3wavelet: no .hdf file
 - qnmd220_330-3wavelet: no .hdf file
-- qnmd220_330_210-2wavelet: no .hdf file
 - qnmd220_330_210-3wavelet: no .hdf file
 - qnmd220_440-3wavelet: no .hdf file
 
@@ -159,6 +163,10 @@
 ### 220+221, negative mode, 2 wavelet
 
 ![220+221, negative mode, 2 wavelet](wav2_d221.png)
+
+### 220+330+210, negative mode, 2 wavelet
+
+![220+330+210, negative mode, 2 wavelet](wav2_d330_210.png)
 
 ### 220+330, negative mode, 2 wavelet
 
