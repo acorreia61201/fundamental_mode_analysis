@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 # Collect the evidence comparison and the posterior plots into one Markdown file.
 #
-# Run this from the directory holding the wav1_*.png and wav2_*.png plots. It reads the saved
-# output of compare_evidence.py, e.g.
+# Run this from the directory holding the wav<w>_*.png plots. It reads the
+# saved output of compare_evidence.py, e.g.
 #     ./compare_evidence.py > evidences.txt
 # and writes:
+#   0. the combined posterior plot, combined_common.png, under the title
+#      "Combined posterior from all runs" (the link is written even if the
+#      file isn't there yet, with a warning),
 #   1. a table of every run's log evidence and its difference from the
 #      matching 220-only run,
 #   2. the 220-only reference evidences,
 #   3. any runs compare_evidence.py skipped,
-#   4. every wav1_*.png and wav2_*.png plot, linked by its absolute path,
-#      each under a title naming its modes (and the wavelet count, if not 1),
-#      title naming its modes, e.g.
+#   4. every wav<w>_*.png plot, for any wavelet count w, linked by its
+#      absolute path, each under a title naming its modes (and the wavelet
+#      count, if not 1), e.g.
 #      wav1_221.png -> "220+221", wav1_d221.png -> "220+221, negative mode",
-#      wav2_d221.png -> "220+221, negative mode, 2 wavelet".
+#      wav3_d221.png -> "220+221, negative mode, 3 wavelet".
 #
 # Usage: ./make_report.sh [evidence_file] [output_file]
 #   evidence_file  default: evidences.txt
@@ -108,22 +111,59 @@ if ! grep -q '^ROW' <<< "$RECORDS" && ! grep -q '^REF' <<< "$RECORDS"; then
     exit 1
 fi
 
-# Plot order: all 1-wavelet plots, then all 2-wavelet plots. Within each,
-# the 220-only plot first, then the other plots, for the runs without
-# dbeta/dphi and then for the "d" runs.
+# The wavelet counts that have plots here, in numerical order, taken from
+# file names of the form wav<w>_<mode>.png.
+wavelet_counts() {
+    local f w
+    for f in wav[0-9]*_*.png; do
+        [[ -f $f ]] || continue
+        w=${f#wav}
+        w=${w%%_*}
+        [[ $w =~ ^[0-9]+$ ]] && echo "$w"
+    done | sort -n -u
+    return 0
+}
+
+# Plot order: by wavelet count, smallest first. Within each, the 220-only
+# plot first, then the other plots, for the runs without dbeta/dphi and then
+# for the "d" runs.
 ordered_plots() {
-    local prefix f
-    for prefix in wav1_ wav1_d wav2_ wav2_d; do
-        [[ -f ${prefix}220.png ]] && echo "${prefix}220.png"
-        for f in "$prefix"[0-9]*.png; do
-            [[ -f $f && $f != "${prefix}220.png" ]] && echo "$f"
+    local w prefix f
+    for w in $(wavelet_counts); do
+        for prefix in "wav${w}_" "wav${w}_d"; do
+            [[ -f ${prefix}220.png ]] && echo "${prefix}220.png"
+            for f in "$prefix"[0-9]*.png; do
+                [[ -f $f && $f != "${prefix}220.png" ]] && echo "$f"
+            done
         done
     done
     return 0
 }
 
+PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
+COMBINED_PLOT=combined_common.png
+COMBINED_TITLE="Combined posterior from all runs"
+if [[ ! -f $COMBINED_PLOT ]]; then
+    echo "Warning: $COMBINED_PLOT not found; leaving a link to it in the report" >&2
+fi
+
+# Markdown image line for a plot in PLOT_DIR. Link targets can't contain
+# spaces unless wrapped in <...>.
+image_line() {
+    local title=$1 path=$PLOT_DIR/$2
+    if [[ $path == *" "* ]]; then
+        echo "![$title](<$path>)"
+    else
+        echo "![$title]($path)"
+    fi
+}
+
 {
     echo "# Ringdown mode comparison"
+    echo
+    echo "## $COMBINED_TITLE"
+    echo
+    image_line "$COMBINED_TITLE" "$COMBINED_PLOT"
     echo
     echo "## Log evidence"
     echo
@@ -151,17 +191,18 @@ ordered_plots() {
         echo "### Skipped runs"
         echo
         while IFS=$'\t' read -r kind message; do
-            [[ $kind == SKIP ]] && echo "- $message"
+            if [[ $kind == SKIP ]]; then
+                echo "- $message"
+            fi
         done <<< "$RECORDS"
     fi
 
     echo
     echo "## Posterior plots"
     PLOTS=$(ordered_plots)
-    PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
     if [[ -z $PLOTS ]]; then
         echo
-        echo "No wav1_*.png or wav2_*.png plots found."
+        echo "No wav<w>_*.png plots found."
     fi
     while IFS= read -r png; do
         [[ -n $png ]] || continue
@@ -176,15 +217,8 @@ ordered_plots() {
         echo
         echo "### $title"
         echo
-        path=$png
-        # Markdown link targets can't contain spaces unless wrapped in <...>.
-        if [[ $path == *" "* ]]; then
-            echo "![$title](<$path>)"
-        else
-            echo "![$title]($path)"
-        fi
+        image_line "$title" "$png"
     done <<< "$PLOTS"
 } > "$OUTPUT_FILE"
 
 echo "Wrote $OUTPUT_FILE"
-
