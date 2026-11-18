@@ -9,7 +9,8 @@
 #      "Combined posterior from all runs" (the link is written even if the
 #      file isn't there yet, with a warning),
 #   1. a table of every run's log evidence and its difference from the
-#      matching 220-only run,
+#      matching 220-only run, sorted from highest to lowest Δ ln Z (runs with
+#      no Δ ln Z last),
 #   2. the 220-only reference evidences,
 #   3. any runs compare_evidence.py skipped,
 #   4. every wav<w>_*.png plot, for any wavelet count w, linked by its
@@ -17,6 +18,11 @@
 #      count, if not 1), e.g.
 #      wav1_221.png -> "220+221", wav1_d221.png -> "220+221, negative mode",
 #      wav3_d221.png -> "220+221, negative mode, 3 wavelet".
+#      The plots are in the same highest-to-lowest Δ ln Z order as the table.
+#      Each plot gets an anchor named after its file (e.g. wav1_330), and the
+#      run names in both evidence tables link to their plots.
+#      The 220-only reference runs count as Δ ln Z = 0; plots of runs that
+#      have no Δ ln Z come last.
 #
 # Usage: ./make_report.sh [evidence_file] [output_file]
 #   evidence_file  default: evidences.txt
@@ -140,6 +146,84 @@ ordered_plots() {
     return 0
 }
 
+# Plot file for a run directory: qnm[d]220[_<mode>]-<w>wavelet ->
+# wav<w>_[d]<mode>.png, e.g. qnmd220_330-2wavelet -> wav2_d330.png.
+dir_png() {
+    local dir=$1 w
+    w=${dir##*-}
+    w=${w%wavelet}
+    printf 'wav%s_%s.png' "$w" "$(dir_mode "$dir")"
+}
+
+# Run name for a table row, linked to its plot's anchor if the plot exists.
+linked_title() {
+    local dir=$1 title png
+    title=$(dir_title "$dir")
+    png=$(dir_png "$dir")
+    if [[ -f $png ]]; then
+        printf '[%s](#%s)' "$title" "${png%.png}"
+    else
+        printf '%s' "$title"
+    fi
+}
+
+# The ROW records sorted from highest to lowest Δ ln Z, with "n/a" rows last.
+# sort -s keeps ties (and the n/a rows) in their original order.
+sorted_rows() {
+    local kind dir lnz diff base
+    while IFS=$'\t' read -r kind dir lnz diff base; do
+        [[ $kind == ROW ]] || continue
+        if [[ $diff == n/a ]]; then
+            printf '1\t0\t%s\t%s\t%s\t%s\n' "$dir" "$lnz" "$diff" "$base"
+        else
+            printf '0\t%s\t%s\t%s\t%s\t%s\n' "${diff%% *}" "$dir" "$lnz" "$diff" "$base"
+        fi
+    done <<< "$RECORDS" | sort -s -t $'\t' -k1,1n -k2,2nr | cut -f 3-
+    return 0
+}
+
+# Δ ln Z of the run a plot comes from, or nothing if it has none. The plot
+# wav<w>_[d]<mode>.png comes from qnm[d]220[_<mode>]-<w>wavelet; the 220-only
+# reference runs count as 0.
+plot_delta() {
+    local png=$1 w mode d="" dir
+    w=${png#wav}
+    w=${w%%_*}
+    mode=${png#wav*_}
+    mode=${mode%.png}
+    if [[ $mode == d* ]]; then
+        d=d
+        mode=${mode#d}
+    fi
+    if [[ $mode == 220 ]]; then
+        dir=qnm${d}220-${w}wavelet
+    else
+        dir=qnm${d}220_${mode}-${w}wavelet
+    fi
+    printf '%s\n' "$RECORDS" | awk -F'\t' -v dir="$dir" '
+        $1 == "ROW" && $2 == dir && $4 != "n/a" { split($4, a, " "); print a[1]; exit }
+        $1 == "REF" && $2 == dir && $3 != "not available" { print 0; exit }
+    '
+}
+
+# The plots in highest-to-lowest Δ ln Z order; plots without a Δ ln Z keep
+# their ordered_plots order at the end.
+sorted_plots() {
+    local png delta i=0
+    while IFS= read -r png; do
+        [[ -n $png ]] || continue
+        i=$((i + 1))
+        delta=$(plot_delta "$png")
+        if [[ -z $delta ]]; then
+            printf '1\t0\t%s\t%s\n' "$i" "$png"
+        else
+            printf '0\t%s\t%s\t%s\n' "$delta" "$i" "$png"
+        fi
+    done <<< "$(ordered_plots)" | sort -t $'\t' -k1,1n -k2,2nr -k3,3n | cut -f 4
+    return 0
+}
+
+PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
 COMBINED_PLOT=combined_common.png
 COMBINED_TITLE="Combined posterior from all runs"
 if [[ ! -f $COMBINED_PLOT ]]; then
@@ -149,7 +233,7 @@ fi
 # Markdown image line for a plot in PLOT_DIR. Link targets can't contain
 # spaces unless wrapped in <...>.
 image_line() {
-    local title=$1 path=$2
+    local title=$1 path=$PLOT_DIR/$2
     if [[ $path == *" "* ]]; then
         echo "![$title](<$path>)"
     else
@@ -162,7 +246,8 @@ image_line() {
     echo
     echo "## $COMBINED_TITLE"
     echo
-    image_line "$COMBINED_TITLE" "$COMBINED_PLOT"
+    # Relative link: the combined plot is expected in the current directory.
+    echo "![$COMBINED_TITLE]($COMBINED_PLOT)"
     echo
     echo "## Log evidence"
     echo
@@ -171,10 +256,10 @@ image_line() {
     echo
     echo "| Modes | ln Z | Δ ln Z |"
     echo "|---|---:|---:|"
-    while IFS=$'\t' read -r kind dir lnz diff base; do
-        [[ $kind == ROW ]] || continue
-        printf '| %s | %s | %s |\n' "$(dir_title "$dir")" "$lnz" "$diff"
-    done <<< "$RECORDS"
+    while IFS=$'\t' read -r dir lnz diff base; do
+        [[ -n $dir ]] || continue
+        printf '| %s | %s | %s |\n' "$(linked_title "$dir")" "$lnz" "$diff"
+    done <<< "$(sorted_rows)"
     echo
     echo "### 220-only reference evidence"
     echo
@@ -182,7 +267,7 @@ image_line() {
     echo "|---|---:|"
     while IFS=$'\t' read -r kind dir value; do
         [[ $kind == REF ]] || continue
-        printf '| %s | %s |\n' "$(dir_title "$dir")" "$value"
+        printf '| %s | %s |\n' "$(linked_title "$dir")" "$value"
     done <<< "$RECORDS"
 
     if grep -q '^SKIP' <<< "$RECORDS"; then
@@ -198,7 +283,7 @@ image_line() {
 
     echo
     echo "## Posterior plots"
-    PLOTS=$(ordered_plots)
+    PLOTS=$(sorted_plots)
     if [[ -z $PLOTS ]]; then
         echo
         echo "No wav<w>_*.png plots found."
@@ -214,6 +299,10 @@ image_line() {
             title="$title, $w wavelet"
         fi
         echo
+        # Explicit anchor, so the table links don't depend on how a given
+        # Markdown viewer turns headings into anchors.
+        echo "<a id=\"${png%.png}\"></a>"
+        echo
         echo "### $title"
         echo
         image_line "$title" "$png"
@@ -221,3 +310,4 @@ image_line() {
 } > "$OUTPUT_FILE"
 
 echo "Wrote $OUTPUT_FILE"
+

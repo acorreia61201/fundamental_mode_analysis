@@ -11,39 +11,39 @@
 
 | Modes | ln Z | Δ ln Z |
 |---|---:|---:|
-| 220, 2 wavelet | 6433462.562 ± 0.044 | 0.206 ± 0.046 |
-| 220+210 | 6433462.221 ± 0.065 | -0.135 ± 0.067 |
-| 220+210, 2 wavelet | 6433461.918 ± 0.051 | -0.439 ± 0.053 |
-| 220+210+320 | 6433464.466 ± 0.028 | 2.110 ± 0.032 |
-| 220+210+320, 2 wavelet | 6433463.147 ± 0.069 | 0.790 ± 0.071 |
-| 220+221 | 6433461.720 ± 0.058 | -0.636 ± 0.060 |
-| 220+221, 2 wavelet | 6433461.849 ± 0.074 | -0.507 ± 0.076 |
-| 220+330 | 6433464.266 ± 0.039 | 1.910 ± 0.042 |
-| 220+330, 2 wavelet | 6433463.198 ± 0.070 | 0.841 ± 0.072 |
-| 220+330+210 | 6433465.661 ± 0.041 | 3.305 ± 0.043 |
-| 220+330+210, 2 wavelet | 6433463.350 ± 0.060 | 0.994 ± 0.062 |
-| 220+440 | 6433463.119 ± 0.033 | 0.763 ± 0.036 |
-| 220+440, 2 wavelet | 6433462.091 ± 0.057 | -0.265 ± 0.059 |
-| 220, negative mode, 2 wavelet | 6433462.111 ± 0.036 | -0.147 ± 0.059 |
-| 220+210, negative mode | 6433462.194 ± 0.065 | -0.064 ± 0.081 |
-| 220+210, negative mode, 2 wavelet | 6433462.603 ± 0.067 | 0.345 ± 0.082 |
-| 220+210+320, negative mode | 6433464.325 ± 0.050 | 2.067 ± 0.069 |
-| 220+210+320, negative mode, 2 wavelet | 6433462.963 ± 0.072 | 0.705 ± 0.086 |
-| 220+221, negative mode | 6433462.374 ± 0.056 | 0.116 ± 0.073 |
-| 220+221, negative mode, 2 wavelet | 6433462.568 ± 0.022 | 0.310 ± 0.052 |
-| 220+330, negative mode | 6433464.352 ± 0.046 | 2.094 ± 0.066 |
-| 220+330, negative mode, 2 wavelet | 6433463.486 ± 0.077 | 1.228 ± 0.090 |
-| 220+330+210, negative mode | 6433465.442 ± 0.043 | 3.184 ± 0.064 |
-| 220+330+210, negative mode, 2 wavelet | 6433463.573 ± 0.060 | 1.316 ± 0.076 |
-| 220+440, negative mode | 6433463.100 ± 0.051 | 0.842 ± 0.069 |
-| 220+440, negative mode, 2 wavelet | 6433462.329 ± 0.075 | 0.071 ± 0.089 |
+| [220+330+210](#wav1_330_210) | 6433465.661 ± 0.041 | 3.305 ± 0.043 |
+| [220+330+210, negative mode](#wav1_d330_210) | 6433465.442 ± 0.043 | 3.184 ± 0.064 |
+| [220+210+320](#wav1_210_320) | 6433464.466 ± 0.028 | 2.110 ± 0.032 |
+| [220+330, negative mode](#wav1_d330) | 6433464.352 ± 0.046 | 2.094 ± 0.066 |
+| [220+210+320, negative mode](#wav1_d210_320) | 6433464.325 ± 0.050 | 2.067 ± 0.069 |
+| [220+330](#wav1_330) | 6433464.266 ± 0.039 | 1.910 ± 0.042 |
+| [220+330+210, negative mode, 2 wavelet](#wav2_d330_210) | 6433463.573 ± 0.060 | 1.316 ± 0.076 |
+| [220+330, negative mode, 2 wavelet](#wav2_d330) | 6433463.486 ± 0.077 | 1.228 ± 0.090 |
+| [220+330+210, 2 wavelet](#wav2_330_210) | 6433463.350 ± 0.060 | 0.994 ± 0.062 |
+| [220+440, negative mode](#wav1_d440) | 6433463.100 ± 0.051 | 0.842 ± 0.069 |
+| [220+330, 2 wavelet](#wav2_330) | 6433463.198 ± 0.070 | 0.841 ± 0.072 |
+| [220+210+320, 2 wavelet](#wav2_210_320) | 6433463.147 ± 0.069 | 0.790 ± 0.071 |
+| [220+440](#wav1_440) | 6433463.119 ± 0.033 | 0.763 ± 0.036 |
+| [220+210+320, negative mode, 2 wavelet](#wav2_d210_320) | 6433462.963 ± 0.072 | 0.705 ± 0.086 |
+| [220+210, negative mode, 2 wavelet](#wav2_d210) | 6433462.603 ± 0.067 | 0.345 ± 0.082 |
+| [220+221, negative mode, 2 wavelet](#wav2_d221) | 6433462.568 ± 0.022 | 0.310 ± 0.052 |
+| [220, 2 wavelet](#wav2_220) | 6433462.562 ± 0.044 | 0.206 ± 0.046 |
+| [220+221, negative mode](#wav1_d221) | 6433462.374 ± 0.056 | 0.116 ± 0.073 |
+| [220+440, negative mode, 2 wavelet](#wav2_d440) | 6433462.329 ± 0.075 | 0.071 ± 0.089 |
+| [220+210, negative mode](#wav1_d210) | 6433462.194 ± 0.065 | -0.064 ± 0.081 |
+| [220+210](#wav1_210) | 6433462.221 ± 0.065 | -0.135 ± 0.067 |
+| [220, negative mode, 2 wavelet](#wav2_d220) | 6433462.111 ± 0.036 | -0.147 ± 0.059 |
+| [220+440, 2 wavelet](#wav2_440) | 6433462.091 ± 0.057 | -0.265 ± 0.059 |
+| [220+210, 2 wavelet](#wav2_210) | 6433461.918 ± 0.051 | -0.439 ± 0.053 |
+| [220+221, 2 wavelet](#wav2_221) | 6433461.849 ± 0.074 | -0.507 ± 0.076 |
+| [220+221](#wav1_221) | 6433461.720 ± 0.058 | -0.636 ± 0.060 |
 
 ### 220-only reference evidence
 
 | Modes | ln Z |
 |---|---:|
-| 220 | 6433462.356 ± 0.016 |
-| 220, negative mode | 6433462.258 ± 0.047 |
+| [220](#wav1_220) | 6433462.356 ± 0.016 |
+| [220, negative mode](#wav1_d220) | 6433462.258 ± 0.047 |
 
 ### Skipped runs
 
@@ -64,114 +64,170 @@
 
 ## Posterior plots
 
-### 220
-
-![220](wav1_220.png)
-
-### 220+210+320
-
-![220+210+320](wav1_210_320.png)
-
-### 220+210
-
-![220+210](wav1_210.png)
-
-### 220+221
-
-![220+221](wav1_221.png)
+<a id="wav1_330_210"></a>
 
 ### 220+330+210
 
-![220+330+210](wav1_330_210.png)
+![220+330+210](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_330_210.png)
 
-### 220+330
-
-![220+330](wav1_330.png)
-
-### 220+440
-
-![220+440](wav1_440.png)
-
-### 220, negative mode
-
-![220, negative mode](wav1_d220.png)
-
-### 220+210+320, negative mode
-
-![220+210+320, negative mode](wav1_d210_320.png)
-
-### 220+210, negative mode
-
-![220+210, negative mode](wav1_d210.png)
-
-### 220+221, negative mode
-
-![220+221, negative mode](wav1_d221.png)
+<a id="wav1_d330_210"></a>
 
 ### 220+330+210, negative mode
 
-![220+330+210, negative mode](wav1_d330_210.png)
+![220+330+210, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d330_210.png)
+
+<a id="wav1_210_320"></a>
+
+### 220+210+320
+
+![220+210+320](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_210_320.png)
+
+<a id="wav1_d330"></a>
 
 ### 220+330, negative mode
 
-![220+330, negative mode](wav1_d330.png)
+![220+330, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d330.png)
 
-### 220+440, negative mode
+<a id="wav1_d210_320"></a>
 
-![220+440, negative mode](wav1_d440.png)
+### 220+210+320, negative mode
 
-### 220, 2 wavelet
+![220+210+320, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d210_320.png)
 
-![220, 2 wavelet](wav2_220.png)
+<a id="wav1_330"></a>
 
-### 220+210+320, 2 wavelet
+### 220+330
 
-![220+210+320, 2 wavelet](wav2_210_320.png)
+![220+330](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_330.png)
 
-### 220+210, 2 wavelet
-
-![220+210, 2 wavelet](wav2_210.png)
-
-### 220+221, 2 wavelet
-
-![220+221, 2 wavelet](wav2_221.png)
-
-### 220+330+210, 2 wavelet
-
-![220+330+210, 2 wavelet](wav2_330_210.png)
-
-### 220+330, 2 wavelet
-
-![220+330, 2 wavelet](wav2_330.png)
-
-### 220+440, 2 wavelet
-
-![220+440, 2 wavelet](wav2_440.png)
-
-### 220, negative mode, 2 wavelet
-
-![220, negative mode, 2 wavelet](wav2_d220.png)
-
-### 220+210+320, negative mode, 2 wavelet
-
-![220+210+320, negative mode, 2 wavelet](wav2_d210_320.png)
-
-### 220+210, negative mode, 2 wavelet
-
-![220+210, negative mode, 2 wavelet](wav2_d210.png)
-
-### 220+221, negative mode, 2 wavelet
-
-![220+221, negative mode, 2 wavelet](wav2_d221.png)
+<a id="wav2_d330_210"></a>
 
 ### 220+330+210, negative mode, 2 wavelet
 
-![220+330+210, negative mode, 2 wavelet](wav2_d330_210.png)
+![220+330+210, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d330_210.png)
+
+<a id="wav2_d330"></a>
 
 ### 220+330, negative mode, 2 wavelet
 
-![220+330, negative mode, 2 wavelet](wav2_d330.png)
+![220+330, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d330.png)
+
+<a id="wav2_330_210"></a>
+
+### 220+330+210, 2 wavelet
+
+![220+330+210, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_330_210.png)
+
+<a id="wav1_d440"></a>
+
+### 220+440, negative mode
+
+![220+440, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d440.png)
+
+<a id="wav2_330"></a>
+
+### 220+330, 2 wavelet
+
+![220+330, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_330.png)
+
+<a id="wav2_210_320"></a>
+
+### 220+210+320, 2 wavelet
+
+![220+210+320, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_210_320.png)
+
+<a id="wav1_440"></a>
+
+### 220+440
+
+![220+440](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_440.png)
+
+<a id="wav2_d210_320"></a>
+
+### 220+210+320, negative mode, 2 wavelet
+
+![220+210+320, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d210_320.png)
+
+<a id="wav2_d210"></a>
+
+### 220+210, negative mode, 2 wavelet
+
+![220+210, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d210.png)
+
+<a id="wav2_d221"></a>
+
+### 220+221, negative mode, 2 wavelet
+
+![220+221, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d221.png)
+
+<a id="wav2_220"></a>
+
+### 220, 2 wavelet
+
+![220, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_220.png)
+
+<a id="wav1_d221"></a>
+
+### 220+221, negative mode
+
+![220+221, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d221.png)
+
+<a id="wav2_d440"></a>
 
 ### 220+440, negative mode, 2 wavelet
 
-![220+440, negative mode, 2 wavelet](wav2_d440.png)
+![220+440, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d440.png)
+
+<a id="wav1_220"></a>
+
+### 220
+
+![220](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_220.png)
+
+<a id="wav1_d220"></a>
+
+### 220, negative mode
+
+![220, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d220.png)
+
+<a id="wav1_d210"></a>
+
+### 220+210, negative mode
+
+![220+210, negative mode](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_d210.png)
+
+<a id="wav1_210"></a>
+
+### 220+210
+
+![220+210](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_210.png)
+
+<a id="wav2_d220"></a>
+
+### 220, negative mode, 2 wavelet
+
+![220, negative mode, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_d220.png)
+
+<a id="wav2_440"></a>
+
+### 220+440, 2 wavelet
+
+![220+440, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_440.png)
+
+<a id="wav2_210"></a>
+
+### 220+210, 2 wavelet
+
+![220+210, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_210.png)
+
+<a id="wav2_221"></a>
+
+### 220+221, 2 wavelet
+
+![220+221, 2 wavelet](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav2_221.png)
+
+<a id="wav1_221"></a>
+
+### 220+221
+
+![220+221](/home/alcorrei/bh_spec/fundamental_mode_analysis/runs/gw190521_injections/seobnr_q8_nonspin_snr20/wav1_221.png)
