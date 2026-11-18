@@ -13,9 +13,10 @@
 #      no Δ ln Z last),
 #   2. the 220-only reference evidences,
 #   3. any runs compare_evidence.py skipped,
-#   4. every wav<w>_*.png plot, for any wavelet count w, linked by its
-#      absolute path, each under a title naming its modes (and the wavelet
-#      count, if not 1), e.g.
+#   4. every wav<w>_*.png plot, for any wavelet count w, linked by its file
+#      name (the report is expected to sit in the same directory as the
+#      plots), each under a title naming its modes (and the wavelet count,
+#      if not 1), e.g.
 #      wav1_221.png -> "220+221", wav1_d221.png -> "220+221, negative mode",
 #      wav3_d221.png -> "220+221, negative mode, 3 wavelet".
 #      The plots are in the same highest-to-lowest Δ ln Z order as the table.
@@ -35,6 +36,13 @@ OUTPUT_FILE=${2:-results.md}
 if [[ ! -f $EVIDENCE_FILE ]]; then
     echo "Error: evidence file '$EVIDENCE_FILE' not found" >&2
     exit 1
+fi
+
+# The plot links are relative to the current directory, so they only work if
+# the report is written here too.
+if [[ $(cd "$(dirname "$OUTPUT_FILE")" 2>/dev/null && pwd -P) != "$(pwd -P)" ]]; then
+    echo "Warning: $OUTPUT_FILE is not in the current directory; its plot" \
+         "links (relative to this directory) will not resolve from there" >&2
 fi
 
 # Turn a mode string into a title: 220 -> "220", 330_210 -> "220+330+210",
@@ -223,17 +231,17 @@ sorted_plots() {
     return 0
 }
 
-PLOT_DIR=$(pwd -P)   # absolute path of the directory holding the plots
 COMBINED_PLOT=combined_common.png
 COMBINED_TITLE="Combined posterior from all runs"
 if [[ ! -f $COMBINED_PLOT ]]; then
     echo "Warning: $COMBINED_PLOT not found; leaving a link to it in the report" >&2
 fi
 
-# Markdown image line for a plot in PLOT_DIR. Link targets can't contain
-# spaces unless wrapped in <...>.
+# Markdown image line for a plot, linked by a path relative to the report,
+# which is expected to be in the same directory as the plots. Link targets
+# can't contain spaces unless wrapped in <...>.
 image_line() {
-    local title=$1 path=$PLOT_DIR/$2
+    local title=$1 path=$2
     if [[ $path == *" "* ]]; then
         echo "![$title](<$path>)"
     else
@@ -246,8 +254,7 @@ image_line() {
     echo
     echo "## $COMBINED_TITLE"
     echo
-    # Relative link: the combined plot is expected in the current directory.
-    echo "![$COMBINED_TITLE]($COMBINED_PLOT)"
+    image_line "$COMBINED_TITLE" "$COMBINED_PLOT"
     echo
     echo "## Log evidence"
     echo
